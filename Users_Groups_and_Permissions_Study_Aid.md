@@ -34,7 +34,7 @@ Users and groups must have a reason to exist, and having logically organized use
 |hsulu     |Hikaru Sulu        |1505 |1505 |hsulu,bridge,tactical,science|0022|
 |jrand     |Janice Rand        |1506 |1506 |jrand,bridge,comms|0022|
 |lmccoy    |Dr. Leonard McCoy  |1507 |1507 |lmccoy,medical,science|0077|
-|cchapel   |Christine Chapel   |1508 |1508 |cchapel,medical|027|
+|cchapel   |Christine Chapel   |1508 |1508 |cchapel,medical|0027|
 
 ### Table 3
 | File/Directory             | Owner   | Group     | Permissions |

@@ -1,0 +1,8 @@
+bridge|5001
+officers|5002
+tactical|5003
+science|5004
+engineering|5005
+comms|5006
+medical|5007
+topsecret|7000

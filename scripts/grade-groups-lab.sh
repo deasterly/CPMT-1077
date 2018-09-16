@@ -25,6 +25,39 @@ must_have_sudo(){
 	fi
 }
 
+check_for_group(){
+	SCRIPT_DIR="/usr/local/bin"
+	DATA_DIR="${SCRIPT_DIR}/DATA_FILES"
+	GROUP_DATA="${DATA_DIR}/group_data.txt"
+	echo "This will check to make sure the groups in Table 1 were created with the correct names and GIDs."
+	echo "NOTE:  This will not check to make sure the correct users are in these groups."
+	for GROUP_NAME in `cut -d'|' -f1 $GROUP_DATA`; do
+		unset THIS_GROUP
+		THIS_GROUP=`getent group $GROUP_NAME`
+		if [ `getent group $GROUP_NAME | wc -l` -eq 1 ] ; then
+			echo "Group $GROUP_NAME exists."
+		else
+			echo "Group $THIS_GROUP doesn't appear to exist."
+			echo "If you created $THIS_GROUP check /etc/group to verify the spelling and case."
+			echo "If you need to change the name of the group, remember 'groupmod --help'."
+		fi
+
+	for GROUP_GID in `cut -d'|' -f2 $GROUP_DATA`; do
+		unset GOOD_GID
+		unset REAL_GID
+		GOOD_GID=$GROUP_GID
+		REAL_GID=`getent group $GROUP_NAME | cut -d':' -f3`
+		if [ $REAL_GID -eq $GOOD_GID ]; then
+			echo "$GROUP_NAME has a GID of $GOOD_GID. You have created this group correctly. Well done! "
+		else 
+			echo "$GROUP_NAME has a GID of $REAL_GID rather than $GOOD_GID."
+			echo "Use 'groupmod --help' to change the GID of $GROUP_NAME."
+		fi  
+
+}
+
+
+
 tidy_columns(){
 	if [ $# != 2 ]; then 
 		echo "ERROR: function tidy_columns called with $# arguments"
@@ -223,4 +256,10 @@ check_perms(){
 		echo "It appears you have successfully completed this lab exercise. WAY TO GO!" 
 	fi
 }
+
+
+### MAIN ###
+
+check_for_group
+
 
