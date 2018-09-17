@@ -39,41 +39,41 @@ Users and groups must have a reason to exist, and having logically organized use
 ### Table 3
 | File/Directory             | Owner   | Group     | Permissions |
 |----------------------------|:-------:|:---------:|------------:|
-|/engineering/               |mscott   |engineering|drwxrwxr-x.  |
-|/engineering/reports/       |mscott   |engineering|drwxrwx---.  |
-|/engineering/mscott.log     |mscott   |mscott     |-rw-rw-r--.  |
-|/engineering/pchekov.log    |pchekov  |pchekov    |-rw-rw-r--.  |
-|/engineering/reports/fuel/  |pchekov  |engineering|drwxrwx---.  |
-|/science/                   |spock    |science    |drwxr-xr-x.  |
-|/science/research/          |root     |science    |drwxrws--T.  |
-|/science/research/spock.log |spock    |science    |-rw-r--r--.  |
-|/medical/                   |root     |medical    |drwxrws---.  |
-|/medical/lmccoy.log         |lmccoy   |lmccoy     |-rw-rw----.  |
-|/medical/cchapel.log        |cchapel  |medical    |-rw-r-----.  |
-|/communications/            |root     |comms      |drwxrwxr-x.  |
-|/communications/starfleet/  |nobody   |topsecret  |d---rws--T.  |
-|/communications/comms.log   |nuhura   |comms      |-rw-r--r--.  |
-|/officers/                  |nobody   |officers   |d---rwx--T.  |
-|/officers/jkirk.log         |jkirk    |jkirk      |-rw-r-----.  |
+|/engineering/               |mscott   |engineering|drwxrwxr-x   |
+|/engineering/reports/       |mscott   |engineering|drwxrwx---   |
+|/engineering/mscott.log     |mscott   |mscott     |-rw-rw-r--   |
+|/engineering/pchekov.log    |pchekov  |pchekov    |-rw-rw-r--   |
+|/engineering/reports/fuel/  |pchekov  |engineering|drwxrwx---   |
+|/science/                   |spock    |science    |drwxr-xr-x   |
+|/science/research/          |root     |science    |drwxrws--T   |
+|/science/research/spock.log |spock    |science    |-rw-r--r--   |
+|/medical/                   |root     |medical    |drwxrws---   |
+|/medical/lmccoy.log         |lmccoy   |lmccoy     |-rw-rw----   |
+|/medical/cchapel.log        |cchapel  |medical    |-rw-r-----   |
+|/communications/            |root     |comms      |drwxrwxr-x   |
+|/communications/starfleet/  |nobody   |topsecret  |d---rws--T   |
+|/communications/comms.log   |nuhura   |comms      |-rw-r--r--   |
+|/officers/                  |nobody   |officers   |d---rwx--T   |
+|/officers/jkirk.log         |jkirk    |jkirk      |-rw-r-----   |
 
 
 
 1. Create the groups in Table 1.
-..* Remember `groupadd --help` and `man groupadd` to find the options and order of arguments.
+  * Remember `groupadd --help` and `man groupadd` to find the options and order of arguments.
 2. Run the script _grade-groups-lab.sh_.
-..* Remember! The _./scripts/_ and _./scripts/DATA_FILES/_ directories should have been copied recursively to /usr/local/bin/ and made executable with `sudo chmod +x /usr/local/bin/*` if you followed the README file.
-..* Correct any errors identified by the grading script until you are successful.
+  * Remember! The _./scripts/_ and _./scripts/DATA_FILES/_ directories should have been copied recursively to /usr/local/bin/ and made executable with `sudo chmod +x /usr/local/bin/*` if you followed the README file.
+  * Correct any errors identified by the grading script until you are successful.
 
 3. Create the user accounts in Table 2.  
-..* Remember `useradd --help`, `usermod --help`, and the manual pages for help with options and the order of command arguments.
-..* Be sure to set the GECOS comment field to contain exactly what is shown in the "Full Name" column.  The grading script WILL check for this.
-..* Be sure each user has a home directory created at /home/USERNAME. Also be sure to set a umask in ~/.bashrc for each user that needs a umask different from your system default.  If your distribution does not create user home directories by default, you may need to edit `/etc/login.defs` or use `useradd --create-home [options]... LOGIN` .
-..* If your distribution does create a private group for each user with a GID number that matches the UID by default, you may need to edit `/etc/login.defs` or use `useradd --user-group [options]... LOGIN` .
-4. Go to the _./scripts/_ directory of the GIT repository where you downloaded this file and run the script _grade-users-lab.sh_. 
-..* Correct any errors identified by the grading script until you are successful.
+  * Remember `useradd --help`, `usermod --help`, and the manual pages for help with options and the order of command arguments.
+  * Be sure to set the GECOS comment field to contain exactly what is shown in the "Full Name" column.  The grading script WILL check for this.
+  * Be sure each user has a home directory created at /home/USERNAME. Also be sure to set a umask in ~/.bashrc for each user that needs a umask different from your system default.  If your distribution does not create user home directories by default, you may need to edit `/etc/login.defs` or use `useradd --create-home [options]... LOGIN` .
+  * If your distribution does create a private group for each user with a GID number that matches the UID by default, you may need to edit `/etc/login.defs` or use `useradd --user-group [options]... LOGIN` .
+4. Run the script _grade-users-lab.sh_ to check your work and repeat as needed. 
+  * Correct any errors identified by the grading script until you are successful.
 
 5. Create the files and directories in Table 3.
-..* Be sure to double check the owner, group, and permissions.  The grading script WILL check for this.
-6. Go to the _./scripts/_ directory of the GIT repository where you downloaded this file and run the script _grade-files-lab.sh_. 
-..* Correct any errors identified by the grading script until you are successful.
+  * Be sure to double check the owner, group, and permissions.  The grading script WILL check for this.
+6. Run the script _grade-files-lab.sh_ to check your work and repeat as needed.
+  * Correct any errors identified by the grading script until you are successful.
 
