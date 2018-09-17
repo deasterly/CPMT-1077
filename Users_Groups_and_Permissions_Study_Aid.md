@@ -26,8 +26,8 @@ Users and groups must have a reason to exist, and having logically organized use
 ### Table 2
 | Username | Full Name         | UID | GID | Groups           | UMASK |
 |----------|-------------------|:---:|:---:|------------------|:-----:|
-|jkirk     |James T. Kirk      |1500 |1500 |jkirk,wheel,bridge,officers,topsecret|0077|
-|spock     |Spock              |1501 |1501 |spock,wheel,bridge,officers,science|0027|
+|jkirk     |James T. Kirk      |1500 |1500 |jkirk,bridge,officers,topsecret|0077|
+|spock     |Spock              |1501 |1501 |spock,bridge,officers,science|0027|
 |mscott    |Montgomery Scott   |1502 |1502 |mscott,officers,engineering,topsecret|0027|
 |pchekov   |Pavel Chekov       |1503 |1503 |pchekov,bridge,tactical,engineering|0022|
 |nuhura    |Nyota Uhura        |1504 |1504 |nuhura,bridge,comms|0022|
@@ -60,14 +60,16 @@ Users and groups must have a reason to exist, and having logically organized use
 
 1. Create the groups in Table 1.
 ..* Remember `groupadd --help` and `man groupadd` to find the options and order of arguments.
-2. Go to the _./scripts/_ directory of the GIT repository where you downloaded this file and run the script _grade-groups-lab.sh_.
+2. Run the script _grade-groups-lab.sh_.
+..* Remember! The _./scripts/_ and _./scripts/DATA_FILES/_ directories should have been copied recursively to /usr/local/bin/ and made executable with `sudo chmod +x /usr/local/bin/*` if you followed the README file.
 ..* Correct any errors identified by the grading script until you are successful.
 
 3. Create the user accounts in Table 2.  
 ..* Remember `useradd --help`, `usermod --help`, and the manual pages for help with options and the order of command arguments.
 ..* Be sure to set the GECOS comment field to contain exactly what is shown in the "Full Name" column.  The grading script WILL check for this.
-..* If your distribution does not default to creating a private group for each user with a GID number that matches the UID, you may need to edit `/etc/login.defs` or use `useradd --user-group [options]... LOGIN` .
-4. Go to the _./scripts/_ directory of the GIT repository where you downloaded this file and run the script _grade-users-lab.sh_, and _grade-files-lab.sh_. 
+..* Be sure each user has a home directory created at /home/USERNAME. Also be sure to set a umask in ~/.bashrc for each user that needs a umask different from your system default.  If your distribution does not create user home directories by default, you may need to edit `/etc/login.defs` or use `useradd --create-home [options]... LOGIN` .
+..* If your distribution does create a private group for each user with a GID number that matches the UID by default, you may need to edit `/etc/login.defs` or use `useradd --user-group [options]... LOGIN` .
+4. Go to the _./scripts/_ directory of the GIT repository where you downloaded this file and run the script _grade-users-lab.sh_. 
 ..* Correct any errors identified by the grading script until you are successful.
 
 5. Create the files and directories in Table 3.

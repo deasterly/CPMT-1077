@@ -25,6 +25,57 @@ must_have_sudo(){
 	fi
 }
 
+check_for_group(){
+	DO_DEBUG="0"
+	SCRIPT_DIR="/usr/local/bin"
+	DATA_DIR="${SCRIPT_DIR}/DATA_FILES"
+	GROUP_DATA="${DATA_DIR}/groups_data.txt"
+	echo "This will check to make sure the groups in Table 1 were created with the correct names and GIDs."
+	echo "NOTE:  This will not check to make sure the correct users are in these groups."
+	echo 
+	
+	for GROUP_NAME in `cat $GROUP_DATA | cut -d'|' -f1 ` ; do
+		unset GROUP_EXISTS
+		unset THIS_GROUP
+		unset GOOD_GID
+		unset REAL_GID
+
+		GROUP_GID=`grep $GROUP_NAME $GROUP_DATA | cut -d'|' -f2`
+		if [ "$DO_DEBUG" -eq "1" ]; then echo "GROUP_NAME is $GROUP_NAME and GROUP_GID is $GROUP_GID " ; fi
+		THIS_GROUP=`getent group $GROUP_NAME`
+		if [ "$DO_DEBUG" -eq "1" ]; then echo "THIS_GROUP details: $THIS_GROUP" ; fi
+		if [ `getent group $GROUP_NAME | wc -l` -eq "1" ] ; then
+			GROUP_EXISTS="1"
+			echo -n "Group $GROUP_NAME exists "
+		else
+			GROUP_EXISTS="0"
+			echo -n "Group $GROUP_NAME doesn't appear to exist.  "
+		fi
+		
+		GOOD_GID=$GROUP_GID
+		REAL_GID=`getent group $GROUP_NAME | cut -d':' -f3`
+		if [ "$DO_DEBUG" -eq "1" ]; then echo "GROUP_EXISTS is $GROUP_EXISTS, GOOD_GID is $GOOD_GID and REAL_GID is $REAL_GID" ; fi
+		
+		if [ "$REAL_GID" == "$GOOD_GID" ] && [ "$GROUP_EXISTS" -eq "1" ]; then
+			echo "and $GROUP_NAME has a GID of $GOOD_GID. You have created this group correctly. Well done! "
+		
+		elif [ "$GROUP_EXISTS" -eq "0" ]; then
+			echo "If you believe you have already created $GROUP_NAME, then check /etc/group to verify the spelling and case."
+			echo "If you need to change the name or GID of a group, remember 'groupmod --help'."
+		
+		else 
+			echo "but $GROUP_NAME has a GID of $REAL_GID rather than $GOOD_GID."
+			# echo "Use 'groupmod --help' to change the GID of $GROUP_NAME."
+
+			
+		fi  
+	echo "Done checking for group $GROUP_NAME."
+	echo 
+	done
+}
+
+
+
 tidy_columns(){
 	if [ $# != 2 ]; then 
 		echo "ERROR: function tidy_columns called with $# arguments"
@@ -223,4 +274,11 @@ check_perms(){
 		echo "It appears you have successfully completed this lab exercise. WAY TO GO!" 
 	fi
 }
+
+
+### MAIN ###
+
+check_for_group
+
+
 

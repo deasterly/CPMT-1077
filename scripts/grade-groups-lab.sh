@@ -26,34 +26,108 @@ must_have_sudo(){
 }
 
 check_for_group(){
+	DO_DEBUG="0"
 	SCRIPT_DIR="/usr/local/bin"
 	DATA_DIR="${SCRIPT_DIR}/DATA_FILES"
-	GROUP_DATA="${DATA_DIR}/group_data.txt"
+	GROUP_DATA="${DATA_DIR}/groups_data.txt"
 	echo "This will check to make sure the groups in Table 1 were created with the correct names and GIDs."
 	echo "NOTE:  This will not check to make sure the correct users are in these groups."
-	for GROUP_NAME in `cut -d'|' -f1 $GROUP_DATA`; do
-		unset THIS_GROUP
-		THIS_GROUP=`getent group $GROUP_NAME`
-		if [ `getent group $GROUP_NAME | wc -l` -eq 1 ] ; then
-			echo "Group $GROUP_NAME exists."
-		else
-			echo "Group $THIS_GROUP doesn't appear to exist."
-			echo "If you created $THIS_GROUP check /etc/group to verify the spelling and case."
-			echo "If you need to change the name of the group, remember 'groupmod --help'."
-		fi
 
-	for GROUP_GID in `cut -d'|' -f2 $GROUP_DATA`; do
+	if [ "$DO_DEBUG" -eq "1" ]; then echo -e 'bridge|5001\nofficers|5002\ntactical|5003\nscience|5004\nengineering|5005\ncomms|5006\nmedical|5007\ntopsecret|7000' ; fi
+
+	echo 
+	
+	for GROUP_NAME in `cat $GROUP_DATA | cut -d'|' -f1 ` ; do
+		unset GROUP_EXISTS
+		unset THIS_GROUP
 		unset GOOD_GID
 		unset REAL_GID
+
+		GROUP_GID=`grep $GROUP_NAME $GROUP_DATA | cut -d'|' -f2`
+		if [ "$DO_DEBUG" -eq "1" ]; then echo "GROUP_NAME is $GROUP_NAME and GROUP_GID is $GROUP_GID " ; fi
+		THIS_GROUP=`getent group $GROUP_NAME`
+		if [ "$DO_DEBUG" -eq "1" ]; then echo "THIS_GROUP details: $THIS_GROUP" ; fi
+		if [ `getent group $GROUP_NAME | wc -l` -eq "1" ] ; then
+			GROUP_EXISTS="1"
+			echo -n "Group $GROUP_NAME exists "
+		else
+			GROUP_EXISTS="0"
+			echo -n "Group $GROUP_NAME doesn't appear to exist.  "
+		fi
+		
 		GOOD_GID=$GROUP_GID
 		REAL_GID=`getent group $GROUP_NAME | cut -d':' -f3`
-		if [ $REAL_GID -eq $GOOD_GID ]; then
-			echo "$GROUP_NAME has a GID of $GOOD_GID. You have created this group correctly. Well done! "
+		if [ "$DO_DEBUG" -eq "1" ]; then echo "GROUP_EXISTS is $GROUP_EXISTS, GOOD_GID is $GOOD_GID and REAL_GID is $REAL_GID" ; fi
+		
+		if [ "$REAL_GID" == "$GOOD_GID" ] && [ "$GROUP_EXISTS" -eq "1" ]; then
+			echo "and $GROUP_NAME has a GID of $GOOD_GID. You have created this group correctly. Well done! "
+		
+		elif [ "$GROUP_EXISTS" -eq "0" ]; then
+			echo "If you believe you have already created $GROUP_NAME, then check /etc/group to verify the spelling and case."
+			echo "If you need to change the name or GID of a group, remember 'groupmod --help'."
+		
 		else 
-			echo "$GROUP_NAME has a GID of $REAL_GID rather than $GOOD_GID."
-			echo "Use 'groupmod --help' to change the GID of $GROUP_NAME."
-		fi  
+			echo "but $GROUP_NAME has a GID of $REAL_GID rather than $GOOD_GID."
+			# echo "Use 'groupmod --help' to change the GID of $GROUP_NAME."
 
+			
+		fi  
+	echo "Done checking for group $GROUP_NAME."
+	echo 
+	done
+}
+
+check_for_user(){
+	DO_DEBUG="1"
+	SCRIPT_DIR="/usr/local/bin"
+	DATA_DIR="${SCRIPT_DIR}/DATA_FILES"
+	USER_DATA="${DATA_DIR}/users_data.txt"
+	echo "This will check to make sure the users in Table 2 were created with the correct names, UIDs, group memberships, and umask permissions.."
+
+		if [ "$DO_DEBUG" -eq "1" ]; then echo 'jkirk|James T. Kirk|1500|1500|jkirk,wheel,bridge,officers,topsecret|0077|\nspock|Spock|1501|1501|spock,wheel,bridge,officers,science|0027|\nmscott|Montgomery Scott|1502|1502|mscott,officers,engineering,topsecret|0027|\npchekov|Pavel Chekov|1503|1503|pchekov,bridge,tactical,engineering|0022|\nnuhura|Nyota Uhura|1504|1504|nuhura,bridge,comms|0022|\nhsulu|Hikaru Sulu|1505|1505|hsulu,bridge,tactical,science|0022|\njrand|Janice Rand|1506|1506|jrand,bridge,comms|0022|\nlmccoy|Dr. Leonard McCoy|1507|1507|lmccoy,medical,science|0077|\ncchapel|Christine Chapel|1508|1508|cchapel,medical|0027|' ; fi
+
+	echo 
+	
+	for USER_NAME in `cat $USER_DATA | cut -d'|' -f1 ` ; do
+		unset USER_EXISTS
+		unset THIS_USER
+		unset GOOD_UID
+		unset REAL_UID
+
+		USER_UID=`grep $USER_NAME $USER_DATA | cut -d'|' -f3`
+		if [ "$DO_DEBUG" -eq "1" ]; then echo "USER_NAME is $USER_NAME and USER_UID is $USER_UID " ; fi
+		THIS_USER=`getent passwd $USER_NAME`
+		if [ "$DO_DEBUG" -eq "1" ]; then echo "THIS_USER details: $THIS_USER" ; fi
+
+
+		if [ `getent passwd $USER_NAME | wc -l` -eq "1" ] ; then
+			USER_EXISTS="1"
+			echo -n "User $USER_NAME exists "
+		else
+			USER_EXISTS="0"
+			echo -n "User $USER_NAME doesn't appear to exist.  "
+		fi
+		
+		GOOD_UID=$USER_UID
+		REAL_UID=`getent passwd $USER_NAME | cut -d':' -f3`
+		if [ "$DO_DEBUG" -eq "1" ]; then echo "USER_EXISTS is $USER_EXISTS, GOOD_UID is $GOOD_UID and REAL_UID is $REAL_UID" ; fi
+		
+		if [ "$REAL_UID" == "$GOOD_UID" ] && [ "$USER_EXISTS" -eq "1" ]; then
+			echo "and $USER_NAME has a UID of $GOOD_UID. You have created this user correctly. Well done! "
+		
+		elif [ "$USER_EXISTS" -eq "0" ]; then
+			echo "If you believe you have already created $USER_NAME, then check /etc/passwd to verify the spelling and case."
+			echo "If you need to change the name or UID of a user, remember 'usermod --help'."
+		
+		else 
+			echo "but $USER_NAME has a UID of $REAL_UID rather than $GOOD_UID."
+			# echo "Use 'usermod --help' to change the UID of $USER_NAME."
+
+			
+		fi  
+	echo "Done checking for user $USER_NAME."
+	echo 
+	done
 }
 
 
@@ -261,5 +335,6 @@ check_perms(){
 ### MAIN ###
 
 check_for_group
+
 
 

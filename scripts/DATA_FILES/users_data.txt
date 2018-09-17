@@ -1,5 +1,5 @@
-jkirk|James T. Kirk|1500|1500|jkirk,wheel,bridge,officers,topsecret|0077|
-spock|Spock|1501|1501|spock,wheel,bridge,officers,science|0027|
+jkirk|James T. Kirk|1500|1500|jkirk,bridge,officers,topsecret|0077|
+spock|Spock|1501|1501|spock,bridge,officers,science|0027|
 mscott|Montgomery Scott|1502|1502|mscott,officers,engineering,topsecret|0027|
 pchekov|Pavel Chekov|1503|1503|pchekov,bridge,tactical,engineering|0022|
 nuhura|Nyota Uhura|1504|1504|nuhura,bridge,comms|0022|
