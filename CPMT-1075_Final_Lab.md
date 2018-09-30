@@ -1,34 +1,45 @@
 # CPMT-1075 Final Lab
 
+#### Topic 101: System Architecture
+#### Topic 102: Linux Installation and Package Management
+#### Topic 103: GNU and Unix Commands
+#### Topic 104: Devices, Linux Filesystems, Filesystem Hierarchy Standard
 
 BEFORE YOU BEGIN:
 1. Reset the OpenSUSE VM that came with the book to the "BASE" snapshot
 2. Add 2 new hard drives of 2GB to the OpenSUSE VM in VirtualBox
-  * Click the VM Settings > Storage > SATA Controller in VirtualBox
+  * Click the VM Settings > Storage > SATA Controller > +(Add Hard Disk) in VirtualBox
+    * Exact menu items may vary between versions
   * Contact the instructor if you need help adding hard drives to your VM
 3. Power up the VM and log in as the user "student"
+4. Install "git"
+  *  Run `sudo zypper install git` in a terminal
+5. Use "git" to download the class materials into "/home/student/"
+  * Run `cd ~ ; git clone https://github.com/deasterly/CPMT-1077.git` as "student"
+6. Copy the lab scripts to "/usr/local/bin/" and make them executable
+  * Run `sudo cp ~/CPMT-1077/scripts/*.sh  /usr/local/bin/ ; sudo chmod +x /usr/local/bin/*.sh`
+7. Save a new snapshot of the VM as "1075-Final"
+---
 
-## Topic 101: System Architecture
-## Topic 102: Linux Installation and Package Management
-## Topic 103: GNU and Unix Commands
-## Topic 104: Devices, Linux Filesystems, Filesystem Hierarchy Standard
+#### Lab Tasks
 
 1. Configure the system to automatically boot to "graphical.target"
+  * Remember `systemctl get-default` and `systemctl set-default [TAB][TAB]`
 2. Start and enable the "rpcbind.service" SystemD unit
   * Remember `systemctl [TAB][TAB]`
 3. Start and enable the "nfs.service" SystemD unit
 ---
-4. On the first added hard drive create a Linux (Type 83) partition using the full 2GB
+4. On the first added hard drive ("/dev/sdb") create a Linux (Type 83) partition using the full 2GB
   * Remember `fdisk --help`
 5. Create an EXT4 filesystem on the new partition with a label of "SR-71"
   * Remember `mkfs --help` and `man mkfs.EXT4`
   * Do not worry about mounting it yet
 ---
-6. Make the second hard drive an LVM Physical Volume.
+6. Make the second hard drive ("/dev/sdc") an LVM Physical Volume.
   * Remember `pvcreate --help` and `man pvcreate`
 7. Create an LVM Volume Group called "SquadVG"
   * Remember `vgcreate --help` and `man vgcreate`
-8. Create two LVM Logical Volumes of 500MB each.
+8. Create two LVM Logical Volumes of 750MB each.
   * Name the first LV "Squad1" and the second LV "Squad2"
   * Remember `lvcreate --help` and `man lvcreate`
 ---
@@ -41,10 +52,6 @@ BEFORE YOU BEGIN:
   * Check `man login.defs` for "USERGROUPS_ENAB"
 12. Edit "/etc/login.defs" to enable the automatic creation of user home directories
   * Check `man login.defs` for "CREATE_HOME"
-12. Create a group called "student" with a GID of 1000 and make it the primary GID for the user "student"
-  * Remember `groupadd --help` and `usermod --help`
-13. Make the user "student" a member of "users" (GID 100) as a secondary/supplementary group 
-  * Remember `usermod --help` and `man group`
 ---
 14. Create the groups in Table 1 (below)
   * Remember `groupadd --help` and `man groupadd`
@@ -69,7 +76,7 @@ BEFORE YOU BEGIN:
   * Be sure to double check the owner, group, and permissions
   * Remember `chown --help` and `chmod --help` 
 ---
-21. Check your work with the "check_CPMT1075_final.sh" script
+21. Check your work with the "/usr/local/bin/check_CPMT1075_final.sh" script
 
 
 
