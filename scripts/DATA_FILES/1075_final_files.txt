@@ -1,0 +1,11 @@
+/blackbird/|summers|blackbird|drwxrws---|
+/blackbird/logan/|logan|blackbird|drwx--S---|
+/blackbird/summers.log|summers|blackbird|-rw-r-----|
+/dangerroom/|storm|dangerroom|drwxrwxr-x|
+/dangerroom/kpryde.log|kpryde|kpryde|-rw-rw-r--|
+/cerebro/|prof_x|cerebro|drwxrws--T|
+/cerebro/prof_x.log|prof_x|prof_x|-rw-------|
+/squad1/|beast|squad1|drwx------|
+/squad2/|logan|squad2|drwx------|
+/teachers/|jgrey|teachers|drwxrws---|
+/teachers/jgrey.log|jgrey|teachers|-rw-r-----|

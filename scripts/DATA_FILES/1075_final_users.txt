@@ -1,0 +1,9 @@
+prof_x|Charles Xavier|1500|1500|prof_x,x-men,teachers,cerebro,topsecret|0077|
+beast|Hank McCoy|1501|1501|beast,x-men,teachers,squad1,cerebro,topsecret|0077|
+jgrey|Jean Grey|1502|1502|jgrey,teachers,squad1,cerebro|0027|
+summers|Scott Summers|1503|1503 |summers,x-men,squad1,blackbird|0027|
+storm|Ororo Munroe|1504|1504|storm,x-men,squad1,dangerroom|0077|
+iceman|Bobby Drake|1505|1505|iceman,x-men,squad2|0022|
+kpryde|Kitty Pryde|1506|1506|kpryde,x-men,squad2,dangerroom|0002|
+nightcrawler|Kurt Wagner|1507|1507 |nightcrawler,x-men,squad2|0022|
+logan|Logan|1508|1508|logan,x-men,squad2,blackbird|0077|

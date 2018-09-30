@@ -1,0 +1,17 @@
+x-men|5001
+teachers|5002
+squad1|5003
+squad2|5004
+blackbird|5005
+dangerroom|5006
+cerebro|5007
+topsecret|7000
+prof_x|1500
+beast|1501
+jgrey|1502
+summers|1503
+storm|1504
+iceman|1505
+kpryde|1506
+nightcrawler|1507
+logan|1508
