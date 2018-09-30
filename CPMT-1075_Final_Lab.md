@@ -16,10 +16,11 @@ BEFORE YOU BEGIN:
   *  Run `sudo zypper install git` in a terminal
 5. Use "git" to download the class materials into "/home/student/"
   * Run `cd ~ ; git clone https://github.com/deasterly/CPMT-1077.git` as "student"
-6. Copy the lab scripts to "/usr/local/bin/" and make them executable
-  * Run `sudo cp ~/CPMT-1077/scripts/*.sh  /usr/local/bin/ ; sudo chmod +x /usr/local/bin/*.sh`
+6. Copy the lab data files and scripts to "/usr/local/bin/" and make them executable
+  * Run `sudo cp -R ~/CPMT-1077/scripts/*  /usr/local/bin/ ; sudo chmod +x /usr/local/bin/*.sh`
 7. Save a new snapshot of the VM as "1075-Final"
 ---
+
 
 #### Lab Tasks
 
@@ -76,7 +77,7 @@ BEFORE YOU BEGIN:
   * Be sure to double check the owner, group, and permissions
   * Remember `chown --help` and `chmod --help` 
 ---
-21. Check your work with the "/usr/local/bin/check_CPMT1075_final.sh" script
+21. Refer to the [Lab Answer Key](./CPMT-1075_Final_Key.md) to check your work
 
 
 
