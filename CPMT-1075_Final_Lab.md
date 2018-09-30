@@ -20,16 +20,17 @@ BEFORE YOU BEGIN:
 ---
 4. On the first added hard drive create a Linux (Type 83) partition using the full 2GB
   * Remember `fdisk --help`
-5. Create an XFS filesystem on the new partition with a label of "SR-71"
-  * Remember `mkfs --help` and `man mkfs.xfs`
+5. Create an EXT4 filesystem on the new partition with a label of "SR-71"
+  * Remember `mkfs --help` and `man mkfs.EXT4`
   * Do not worry about mounting it yet
 ---
 6. Make the second hard drive an LVM Physical Volume.
-  * Remember `pvcreate --help | less` and `man pvcreate` if you need help
+  * Remember `pvcreate --help` and `man pvcreate`
 7. Create an LVM Volume Group called "SquadVG"
+  * Remember `vgcreate --help` and `man vgcreate`
 8. Create two LVM Logical Volumes of 500MB each.
   * Name the first LV "Squad1" and the second LV "Squad2"
-  * Remember `lvcreate --help | less` and `man lvcreate` if you need help 
+  * Remember `lvcreate --help` and `man lvcreate`
 ---
 9. Create an EXT4 filesystem on the "/dev/SquadVG/Squad1" LV
   * Do not worry about mounting it yet
@@ -41,16 +42,18 @@ BEFORE YOU BEGIN:
 12. Edit "/etc/login.defs" to enable the automatic creation of user home directories
   * Check `man login.defs` for "CREATE_HOME"
 12. Create a group called "student" with a GID of 1000 and make it the primary GID for the user "student"
+  * Remember `groupadd --help` and `usermod --help`
 13. Make the user "student" a member of "users" (GID 100) as a secondary/supplementary group 
+  * Remember `usermod --help` and `man group`
 ---
 14. Create the groups in Table 1 (below)
-  * Remember `groupadd --help` and `man groupadd` to find the options and order of arguments
+  * Remember `groupadd --help` and `man groupadd`
 15. Create the user accounts in Table 2  
-  * Remember `useradd --help`, `usermod --help`, and the manual pages for help with options and the order of command arguments.
+  * Remember `useradd --help`, `usermod --help`, and the manual pages
   * Be sure each user has a private primary group
     * Remember to edit "/etc/login.defs" or to use `useradd --user-group [options]... LOGIN`
-  * Be sure to set the GECOS comment field to contain exactly what is shown in the "Full Name" column
-  * Be sure each user has a home directory created at "/home/<USERNAME>" 
+  * Be sure to set the GECOS comment field to contain __exactly__ what is shown in the "Full Name" column
+  * Be sure each user has a home directory created at "/home/_<USERNAME>_" 
     * Remember to edit "/etc/login.defs" or to use `useradd --create-home [options]... LOGIN`
   * Also be sure to set a umask in "~/.bashrc" for each user that needs a umask different from your system default  
 --- 
@@ -58,13 +61,17 @@ BEFORE YOU BEGIN:
   * "/blackbird/"
   * "/squad1/"
   * "/squad2/"
-17. Edit "/etc/fstab" to mount the XFS filesystem labeled "SR-71" under "/blackbird/" using the default options
-18. Edit "/etc/fstab" to mount the ext4 filesystem on the "Squad1" LV under "/squad1/" using the default options
-19. edit "/etc/fstab" to mount the ext4 filesystem on the "squad2" LV under "/squad2/" using the default options
+17. Edit "/etc/fstab" to mount the EXT4 filesystem labeled "SR-71" under "/blackbird/" using the default options
+18. Edit "/etc/fstab" to mount the EXT4 filesystem on the "Squad1" LV under "/squad1/" using the default options
+19. edit "/etc/fstab" to mount the EXT4 filesystem on the "squad2" LV under "/squad2/" using the default options
 ---
-16. Create/configure the files and directories in Table 3
+20. Create/configure the files and directories in Table 3
   * Be sure to double check the owner, group, and permissions
   * Remember `chown --help` and `chmod --help` 
+---
+21. Check your work with the "check_CPMT1075_final.sh" script
+
+
 
 ### Table 1
 | Groups     | GIDs | Members                                                         |
