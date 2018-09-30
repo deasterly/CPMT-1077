@@ -33,7 +33,7 @@ BEFORE YOU BEGIN:
 4. On the first added hard drive ("/dev/sdb") create a Linux (Type 83) partition using the full 2GB
   * Remember `fdisk --help`
 5. Create an EXT4 filesystem on the new partition with a label of "SR-71"
-  * Remember `mkfs --help` and `man mkfs.EXT4`
+  * Remember `mkfs --help` and `man mkfs.ext4`
   * Do not worry about mounting it yet
 ---
 6. Make the second hard drive ("/dev/sdc") an LVM Physical Volume.
@@ -71,9 +71,10 @@ BEFORE YOU BEGIN:
   * "/squad2/"
 17. Edit "/etc/fstab" to mount the EXT4 filesystem labeled "SR-71" under "/blackbird/" using the default options
 18. Edit "/etc/fstab" to mount the EXT4 filesystem on the "Squad1" LV under "/squad1/" using the default options
-19. edit "/etc/fstab" to mount the EXT4 filesystem on the "squad2" LV under "/squad2/" using the default options
+19. Edit "/etc/fstab" to mount the EXT4 filesystem on the "squad2" LV under "/squad2/" using the default options
+20. Confirm all filesystems mount successfully by rebooting or running `mount -av`
 ---
-20. Create/configure the files and directories in Table 3
+21. Create/configure the files and directories in Table 3
   * Be sure to double check the owner, group, and permissions
   * Remember `chown --help` and `chmod --help` 
 ---

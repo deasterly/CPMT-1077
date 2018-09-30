@@ -294,7 +294,7 @@ jgrey
 uid=1502(jgrey) gid=1502(jgrey) groups=1502(jgrey),5001(x-men),5002(teachers),5003(squad1),5007(cerebro)
 summers
 0027
-uid=1503(summers) gid=1503(summers) groups=1503(summers),5001(x-men),5002(teachers),5003(squad1),5005(blackbird)
+uid=1503(summers) gid=1503(summers) groups=1503(summers),5001(x-men),5003(squad1),5005(blackbird)
 storm
 0077
 uid=1504(storm) gid=1504(storm) groups=1504(storm),5001(x-men),5003(squad1),5006(dangerroom)
@@ -420,8 +420,7 @@ drwxr-xr-x 28 root  root     4096 Sep 30 12:23 ..
 -rw-r-----  1 jgrey teachers    0 Sep 30 12:23 jgrey.log
 </pre>
 ---
-22. Refer to the [Lab Answer Key](./CPMT-1075_Final_Key.md) to check your work
-
+22. Ask the instructor for help if parts of this Answer Key are unclear to you
 
 
 ### Table 1
