@@ -41,7 +41,7 @@ rpcbind.service - RPC Bind
    Active: active (running) since Sun 2018-09-30 10:45:40 MDT; 4s ago
 </pre>
 3. Start and enable the "nfs.service" SystemD unit
-
+<pre>
 openSUSE:~ # systemctl status nfs.service
 nfs.service - LSB: NFS client services
    Loaded: loaded (/etc/init.d/nfs)
@@ -52,17 +52,17 @@ nfs.service - LSB: NFS client services
 openSUSE:~ # systemctl start nfs.service ; systemctl enable nfs.service
 nfs.service is not a native service, redirecting to /sbin/chkconfig.
 Executing /sbin/chkconfig nfs on
----
+
 openSUSE:~ # systemctl status nfs.service
 nfs.service - LSB: NFS client services
    Loaded: loaded (/etc/init.d/nfs)
   Drop-In: /run/systemd/generator/nfs.service.d
            └─50-insserv.conf-$remote_fs.conf
    Active: active (running) since Sun 2018-09-30 10:47:13 MDT; 16s ago
-
+</pre>
 ---
 4. On the first added hard drive ("/dev/sdb") create a Linux (Type 83) partition using the full 2GB
-
+<pre>
 openSUSE:~ # fdisk /dev/sdb
 Welcome to fdisk (util-linux 2.23.2).
 
@@ -110,10 +110,9 @@ Disk identifier: 0x30ad4f53
 
    Device Boot      Start         End      Blocks   Id  System
 /dev/sdb1            2048     4194303     2096128   83  Linux
-
-
+</pre>
 5. Create an EXT4 filesystem on the new partition with a label of "SR-71"
-
+<pre>
 openSUSE:~ # mkfs.ext4 -L "SR-71" /dev/sdb1
 mke2fs 1.42.8 (20-Jun-2013)
 Filesystem label=SR-71
@@ -121,10 +120,10 @@ OS type: Linux...
 
 openSUSE:~ # blkid /dev/sdb1
 /dev/sdb1: LABEL="SR-71" UUID="d74f26a8-2e1e-4974-9067-620ba76b335d" TYPE="ext4"
-
+</pre>
 ---
 6. Make the second hard drive ("/dev/sdc") an LVM Physical Volume.
-
+<pre>
 openSUSE:~ # lsblk
 NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 sda      8:0    0   12G  0 disk 
@@ -139,9 +138,9 @@ openSUSE:~ # pvcreate /dev/sdc
 openSUSE:~ # pvs
   PV         VG   Fmt  Attr PSize PFree
   /dev/sdc        lvm2 a--  2.00g 2.00g
-
+</pre>
 7. Create an LVM Volume Group called "SquadVG"
-
+<pre>
 openSUSE:~ # vgcreate SquadVG /dev/sdc
 openSUSE:~ # pvs
   PV         VG      Fmt  Attr PSize PFree
@@ -149,10 +148,10 @@ openSUSE:~ # pvs
 openSUSE:~ # vgs
   VG      #PV #LV #SN Attr   VSize VFree
   SquadVG   1   0   0 wz--n- 2.00g 2.00g
-
+</pre>
 8. Create two LVM Logical Volumes of 750MB each.
   * Name the first LV "Squad1" and the second LV "Squad2"
-
+<pre>
 openSUSE:~ # lvcreate -n Squad1 -L 750M SquadVG
 openSUSE:~ # vgs
   VG      #PV #LV #SN Attr   VSize VFree
@@ -183,12 +182,11 @@ sdc                8:32   0    2G  0 disk
 ├─SquadVG-Squad1 253:0    0  752M  0 lvm  
 └─SquadVG-Squad2 253:1    0  752M  0 lvm  
 sr0               11:0    1 1024M  0 rom  
-
-
+</pre>
 ---
 9. Create an EXT4 filesystem on the "/dev/SquadVG/Squad1" LV
   * Do not worry about mounting it yet
-
+<pre>
 openSUSE:~ # mkfs.ext4 /dev/SquadVG/Squad1
 mke2fs 1.42.8 (20-Jun-2013)
 Filesystem label=
@@ -196,10 +194,10 @@ OS type: Linux
 
 openSUSE:~ # blkid /dev/SquadVG/Squad1
 /dev/SquadVG/Squad1: UUID="19d42d8a-c1a5-40d8-99ea-b2c6a1509473" TYPE="ext4" 
-
+</pre>
 10. Create an EXT4 filesystem on the "/dev/SquadVG/Squad2" LV
   * Do not worry about mounting it yet
-
+<pre>
 openSUSE:~ # mkfs.ext4 /dev/SquadVG/Squad2
 mke2fs 1.42.8 (20-Jun-2013)
 Filesystem label=
@@ -213,28 +211,26 @@ openSUSE:~ # blkid
 /dev/sda3: UUID="a64ce2de-258f-41a0-bd54-920f0a3e2e94" TYPE="ext4" 
 /dev/sdc: UUID="BEiRf5-WFIi-Q9yC-PrdP-MWYu-6QUc-EvS3xE" TYPE="LVM2_member" 
 /dev/mapper/SquadVG-Squad2: UUID="2a70b305-332a-4b19-8a07-e79f78748df1" TYPE="ext4"
-
+</pre>
 ---
 11. Edit "/etc/login.defs" to enable the automatic creation of private user groups
 12. Edit "/etc/login.defs" to enable the automatic creation of user home directories
-
+<pre>
 openSUSE:~ # vim /etc/login.defs 
 openSUSE:~ # grep -E 'USERGROUPS_ENAB|CREATE_HOME' /etc/login.defs
 #USERGROUPS_ENAB no
 USERGROUPS_ENAB yes
 #CREATE_HOME     no
 CREATE_HOME     yes
-
+</pre>
 ---
 14. Create the groups in Table 1 (below)
-
+<pre>
 openSUSE:~ #  groupadd --gid 5001 x-men
 openSUSE:~ # groupadd -g 5002 teachers
 openSUSE:~ # groupadd -g 5003 squad1 ; groupadd -g 5004 squad2 ; groupadd -g 5005 blackbird
 openSUSE:~ # groupadd -g 5006 dangerroom ; groupadd -g 5007 cerebro ; groupadd -g 7000 topsecret
 openSUSE:~ # getent group | grep -E '[57][0-9]{3}'
-nobody:x:65533:
-nogroup:x:65534:nobody
 x-men:x:5001:
 teachers:x:5002:
 squad1:x:5003:
@@ -243,9 +239,9 @@ blackbird:x:5005:
 dangerroom:x:5006:
 cerebro:x:5007:
 topsecret:x:7000:
-
+</pre>
 15. Create the user accounts in Table 2  
-
+<pre>
 openSUSE:~ # useradd -mUu 1500 -c "Charles Xavier" -G x-men,teachers,cerebro,topsecret prof_x
 openSUSE:~ # id prof_x
 uid=1500(prof_x) gid=1500(prof_x) groups=5001(x-men),5002(teachers),5007(cerebro),7000(topsecret),1500(prof_x)
@@ -268,9 +264,9 @@ nightcrawler:x:1507:1507:Kurt Wagner:/home/nightcrawler:/bin/bash
 logan:x:1508:1508:Logan:/home/logan:/bin/bash
 openSUSE:~ # ls /home/
 beast  iceman  jgrey  kpryde  logan  lost+found  nightcrawler  prof_x  storm  student  summers
-
+</pre>
   * Also be sure to set a umask in "~/.bashrc" for each user that needs a umask different from your system default  
-
+<pre>
 openSUSE:~ # su -l -c 'echo umask 077 >> ~/.bashrc ; grep umask ~/.bashrc' prof_x
 umask 077
 openSUSE:~ # su -lc 'umask' prof_x 
@@ -314,23 +310,23 @@ uid=1507(nightcrawler) gid=1507(nightcrawler) groups=1507(nightcrawler),5001(x-m
 logan
 0077
 uid=1508(logan) gid=1508(logan) groups=1508(logan),5001(x-men),5004(squad2),5005(blackbird)
-
-
+</pre>
 --- 
 16. Create the following directories:
   * "/blackbird/"
   * "/squad1/"
   * "/squad2/"
+<pre>
 openSUSE:~ # mkdir /blackbird /squad{1,2} 
 openSUSE:~ # ls -ld /bl* /sq*
 drwxr-xr-x 2 root root 4096 Sep 30 11:58 /blackbird
 drwxr-xr-x 2 root root 4096 Sep 30 11:58 /squad1
 drwxr-xr-x 2 root root 4096 Sep 30 11:58 /squad2
-
+</pre>
 17. Edit "/etc/fstab" to mount the EXT4 filesystem labeled "SR-71" under "/blackbird/" using the default options
 18. Edit "/etc/fstab" to mount the EXT4 filesystem on the "Squad1" LV under "/squad1/" using the default options
 19. Edit "/etc/fstab" to mount the EXT4 filesystem on the "squad2" LV under "/squad2/" using the default options
-
+<pre>
 openSUSE:~ # vim /etc/fstab
 openSUSE:~ # cat /etc/fstab
 /dev/disk/by-id/ata-VBOX_HARDDISK_VB4a721681-599dfb5a-part1     swap            swap    defaults        0 0
@@ -339,9 +335,9 @@ openSUSE:~ # cat /etc/fstab
 LABEL="SR-71"                                                   /blackbird      ext4    defaults        1 2
 /dev/SquadVG/Squad1                                             /squad1         ext4    defaults        1 2
 /dev/mapper/SquadVG-Squad2                                      /squad2         ext4    defaults        1 2
-
+</pre>
 20. Confirm all filesystem mount successfully by rebooting or running `mount -av`
-
+<pre>
 openSUSE:~ # mount -av
 swap                     : ignored
 /                        : ignored
@@ -368,11 +364,11 @@ sdc                8:32   0    2G  0 disk
 ├─SquadVG-Squad1 253:0    0  752M  0 lvm  /squad1
 └─SquadVG-Squad2 253:1    0  752M  0 lvm  /squad2
 sr0               11:0    1 1024M  0 rom  
-
+</pre>
 ---
 21. Create/configure the files and directories in Table 3
   * Be sure to double check the owner, group, and permissions
-
+<pre>
 openSUSE:~ # chown summers:blackbird /blackbird/ ; chmod 2770 /blackbird/
 openSUSE:~ # su -lc 'mkdir /blackbird/logan' logan
 openSUSE:~ # su -lc 'touch /blackbird/summers.log' summers
@@ -422,7 +418,7 @@ total 8
 drwxrws---  2 jgrey teachers 4096 Sep 30 12:23 .
 drwxr-xr-x 28 root  root     4096 Sep 30 12:23 ..
 -rw-r-----  1 jgrey teachers    0 Sep 30 12:23 jgrey.log
-
+</pre>
 ---
 22. Refer to the [Lab Answer Key](./CPMT-1075_Final_Key.md) to check your work
 
