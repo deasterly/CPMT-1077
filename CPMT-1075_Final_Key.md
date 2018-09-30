@@ -16,7 +16,7 @@ NOTE: Lots of extraneous output was removed from the solutions, so if you see ot
 #### Lab Tasks
 
 1. Configure the system to automatically boot to "graphical.target"
-
+<pre>
 openSUSE:~ # systemctl get-default 
 runlevel5.target
 openSUSE:~ # systemctl set-default graphical.target 
@@ -24,9 +24,9 @@ rm '/etc/systemd/system/default.target'
 ln -s '/usr/lib/systemd/system/graphical.target' '/etc/systemd/system/default.target'
 openSUSE:~ # systemctl get-default 
 graphical.target
-
+</pre>
 2. Start and enable the "rpcbind.service" SystemD unit
-
+<pre>
 openSUSE:~ # systemctl status rpcbind.service 
 rpcbind.service - RPC Bind
    Loaded: loaded (/usr/lib/systemd/system/rpcbind.service; disabled)
@@ -39,7 +39,7 @@ openSUSE:~ # systemctl status rpcbind.service
 rpcbind.service - RPC Bind
    Loaded: loaded (/usr/lib/systemd/system/rpcbind.service; enabled)
    Active: active (running) since Sun 2018-09-30 10:45:40 MDT; 4s ago
-
+</pre>
 3. Start and enable the "nfs.service" SystemD unit
 
 openSUSE:~ # systemctl status nfs.service
