@@ -12,13 +12,14 @@ BEFORE YOU BEGIN:
   * Name one VM CPMT-1076_Final_CentOS7 and the other CPMT-1076_Final_Ubuntu_1804
   * Give each VM 2GB of RAM and a single 20GB VDI hard disk
   * Give each VM 2 Network Adapters
-    * Network Adapter 1 for both VMs should be attached to the "NAT" network
+    * Network Adapter 1 for both VMs should be bridged to the interface your system uses to access the Internet
+      * This assumes that your Internet connection provides DHCP
     * Network Adapter 2 for both VMs should be attached to the "Internal" network
 2. If needed, download the DVD ISO images for CentOS 7.5 and Ubuntu 18.04 Server
   * Find where to download the ISOs from https://distrowatch.com or go directly to https://centos.org and https://ubuntu.com
 3. Install CentOS 7.5 on the CentOS VM
   * Under "Network & Host Name" turn on the first Network Interface Card (NIC)
-    * This NIC should be attached to the "NAT" network and get an IPv4 address via DHCP
+    * This NIC should be bridged to your Internet connected NIC/WiFi adapter and should get an IPv4 address via DHCP
   * Under "Date & Time" be sure to set your time zone and enable Network Time Protocol (NTP)
   * Under "Software Selection" be sure to choose "Server with GUI" under the "Base Environment"
     * Also select "MariaDB Database Server" under "Add-Ons for Selected Environment"
