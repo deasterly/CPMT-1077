@@ -1,12 +1,12 @@
-# CPMT-1075 Final Lab Solution Key
+# Dave's Practice Lab 1 Solution Key
 
-#### Topic 101: System Architecture
-#### Topic 102: Linux Installation and Package Management
-#### Topic 103: GNU and Unix Commands
-#### Topic 104: Devices, Linux Filesystems, Filesystem Hierarchy Standard
+#### System Architecture
+#### Linux Installation and Package Management
+#### GNU and Unix Commands
+#### Devices, Linux Filesystems, Filesystem Hierarchy Standard
 
 A WORD TO THE WISE:  One of the most important parts of a "real IT job" is being able to test and verify your own work.  
-The examples below are just one of many different ways to accomplish these objectives on a Linux system.  If you find a better way, please share it in the Google Classroom comments!
+The examples below are just one of many different ways to accomplish these objectives on a Linux system.  If you find a better way, use it!
 
 NOTE: Lots of extraneous output was removed from the solutions, so if you see other messages then read them carefully and disregard non-errors.
 
