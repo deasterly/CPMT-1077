@@ -1,9 +1,9 @@
 # User, Group, and Basic Permissions Administration
-## A study aid for the CompTIA Linux+/LPIC-1 CPMT-107{5..7} series
+## A study aid for Linux certification candidates
 
 Managing user accounts, groups and file/directory permissions is an essential Linux system administration task.  When new employees need login credentials or share access or when existing users are reassigned or promoted and need new and different access privileges, it is the SysAdmin's job to **get it right the first time.**
 
-To prepare you not only for the Linux+/LPIC-1 exams, but an actual career doing IT administration you must practice using these skills to fully internalize the knowledge expected of a certified Linux admin.  These exercises are intended to give you the opportunity to practice these skills.  If you download the grading scripts associated with these exercises you can even evaluate your own success and identify the areas of opportunity where you may need to study and practice more.
+To prepare you not only for Linux cert exams, but an actual career doing IT administration you must practice using these skills to fully internalize the knowledge expected of a certified Linux admin.  These exercises are intended to give you the opportunity to practice these skills.  If you download the grading scripts associated with these exercises you can even evaluate your own success and identify the areas of opportunity where you may need to study and practice more.
 
 These exercises will first assign you a series of tasks to accomplish on a freshly installed Linux system.  If you are using virtualization like VirtualBox, VMware, or Hyper-V saving a snapshot before performing these exercises will give you an opportunity to quickly reset and practice again.
 
