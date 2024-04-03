@@ -1,5 +1,7 @@
-# How to check your work
-Try this:
+# How to check your work for Dave's Practice Lab #1
+
+Try this and if you see different results figure what went wrong from your command history:
+
 <pre>
 openSUSE:~ # getent passwd | grep 150[0-9]
 prof_x:x:1500:1500:Charles Xavier:/home/prof_x:/bin/bash
@@ -11,6 +13,8 @@ iceman:x:1505:1505:Bobby Drake:/home/iceman:/bin/bash
 kpryde:x:1506:1506:Kitty Pryde:/home/kpryde:/bin/bash
 nightcrawler:x:1507:1507:Kurt Wagner:/home/nightcrawler:/bin/bash
 logan:x:1508:1508:Logan:/home/logan:/bin/bash
+
+  
 student@openSUSE:~/CPMT-1077> getent group | grep -E '150[1-8]|[57]00[0-7]'
 x-men:x:5001:prof_x,beast,jgrey,summers,storm,iceman,kpryde,nightcrawler,logan
 teachers:x:5002:prof_x,beast,jgrey
@@ -28,6 +32,8 @@ iceman:!:1505:
 kpryde:!:1506:
 nightcrawler:!:1507:
 logan:!:1508:
+
+  
 openSUSE:~ # ls -ld /home/* /bl* /sq* /te* /ce*
 drwxrws---  4 summers      blackbird     4096 Sep 30 12:12 /blackbird
 drwxrws--T  2 prof_x       cerebro       4096 Sep 30 12:18 /cerebro
@@ -45,6 +51,8 @@ drwxr-xr-x  7 summers      summers       4096 Sep 30 11:34 /home/summers
 drwx------  3 beast        squad1        4096 Sep 30 11:04 /squad1
 drwx------  3 logan        squad2        4096 Sep 30 11:08 /squad2
 drwxrws---  2 jgrey        teachers      4096 Sep 30 12:23 /teachers
+
+  
 openSUSE:~ # ls -lR /blackbird/ /cerebro/ /teachers/
 /blackbird/:
 total 20
@@ -66,6 +74,8 @@ total 0
 total 0
 -rw-r----- 1 jgrey teachers 0 Sep 30 12:23 jgrey.log
 
+
+  
 openSUSE:~ # for XMAN in prof_x beast jgrey summers storm iceman kpryde nightcrawler logan ; do su -l -c 'echo "For XMAN `whoami` the UMASK is `umask` " ; echo "XMAN `whoami` UID, GID, and group memberships: " ; id $XMAN ; echo '  $XMAN  ; done
 For XMAN prof_x the UMASK is 0077 
 XMAN prof_x UID, GID, and group memberships: 
