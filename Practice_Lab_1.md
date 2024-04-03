@@ -1,24 +1,25 @@
-# CPMT-1075 Final Lab
+# Dave's Practice Lab #1
 
-#### Topic 101: System Architecture
-#### Topic 102: Linux Installation and Package Management
-#### Topic 103: GNU and Unix Commands
-#### Topic 104: Devices, Linux Filesystems, Filesystem Hierarchy Standard
+#### System Architecture
+#### Linux Installation and Package Management
+#### GNU and Unix Commands
+#### Devices, Linux Filesystems, Filesystem Hierarchy Standard
 
 BEFORE YOU BEGIN:
-1. Reset the OpenSUSE VM that came with the book to the "BASE" snapshot
-2. Add 2 new hard drives of 2GB to the OpenSUSE VM in VirtualBox
-  * Click the VM Settings > Storage > SATA Controller > +(Add Hard Disk) in VirtualBox
-    * Exact menu items may vary between versions
-  * Contact the instructor if you need help adding hard drives to your VM
+1. Freshly install a minimal Linux VM or reset an existing VM to a snapshot taken after a fresh install. Create an admin user named "student" and set a good password.
+  * These tasks should work the same on Debian/Ubuntu, SUSE/OpenSUSE, or RHEL/Rocky/Alma GNU/Linux distributions and most derivatives.
+2. Add 2 new hard drives of 2GB to the VM in your hypervisor
+  * EXAMPLE: Click the VM Settings > Storage > SATA Controller > +(Add Hard Disk) in VirtualBox
+    * Exact menu items may vary between versions and hypervisors. (I suggest Linux KVM and Cockpit to make it easy.)
+   
 3. Power up the VM and log in as the user "student"
 4. Install "git"
-  *  Run `sudo zypper install git` in a terminal
+  *  Run `sudo zypper install git` in a terminal for SUSE, or `sudo apt install git` for Debian derivatives, or `sudo yum install git` for Red Hat derivatives.
 5. Use "git" to download the class materials into "/home/student/"
   * Run `cd ~ ; git clone https://github.com/deasterly/CPMT-1077.git` as "student"
 6. Copy the lab data files and scripts to "/usr/local/bin/" and make them executable
   * Run `sudo cp -R ~/CPMT-1077/scripts/*  /usr/local/bin/ ; sudo chmod +x /usr/local/bin/*.sh`
-7. Save a new snapshot of the VM as "1075-Final"
+7. Save a new snapshot of the VM as "Practice_Lab_1"
 ---
 
 
