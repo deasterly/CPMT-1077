@@ -1,12 +1,12 @@
-### CPMT-1077 Series Practice Exercises
+### Linux Administration Practice Exercises
 
-These documents and the accompanying scripts are offered as a study companion to help learners prepare for either the CompTIA Linux+ or LPIC-1 certification exams.
+These documents and the accompanying scripts are offered as a study companion to help learners prepare for basic Linux certification exams.
 
 The exercises are distributed as plain text documents in the "MarkDown" format.
 
 The scripts are simple BASH shell scripts that should be portable to almost any Linux system.  Scripts and subdirectories found in the [./scripts](./scripts/) directory must be copied recursively to the _/usr/local/bin/_ directory of your Linux system.  You will need to make them executable with `chmod +x /usr/local/bin/*` before you run them. **DO NOT USE `chmod 777 FILE` to make a file executable. THIS IS _VERY BAD_**.
 
-Good luck in the pursuit of your Linux+ and/or LPIC-1 certification!  Students who need help should contact the instructor, <david.easterly@austincc.edu>.
+Good luck in the pursuit of your Linux certification!  
 
 This work is released under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License.
 <https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode>
